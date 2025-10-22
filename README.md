@@ -12,9 +12,8 @@
 
 ## 📘 사용 기본 구조
 모든 코드는 아래와 같은 이벤트 구조를 따라야 합니다:
-
-```
 <img width="1052" height="709" alt="Screenshot 2025-10-23 004158" src="https://github.com/user-attachments/assets/258a2c6e-6abe-4cf5-967c-435a368816fc" />
+```
 <스크립트 내용>
 // 반드시 마지막에
 Control Self Switch: A = ON
