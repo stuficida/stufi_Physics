@@ -14,9 +14,8 @@ If you find some error on document, tell me.
 
 ## 📘 Basic Usage Structure
 All event scripts must follow this structure:
-
-```
 <img width="1052" height="709" alt="Screenshot 2025-10-23 004158" src="https://github.com/user-attachments/assets/258a2c6e-6abe-4cf5-967c-435a368816fc" />
+```
 <Script content>
 // Must end with:
 Control Self Switch: A = ON
