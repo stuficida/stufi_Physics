@@ -181,6 +181,124 @@ new s_Joint(s_obj_a, s_obj_b, arm_length, nf, zetta, point_a = [0, 0], point_b =
 
 ---
 
+## ⚔️ s_COLLIDER  
+
+두 물체 간의 **충돌 감지 및 계산**과 관련된 함수들의 모음입니다.  
+
+### 🔹 메서드
+
+```js
+s_COLLIDER.line_trace(start, end, ignore_objs, debug_line = false)
+```
+
+| 매개변수 | 설명 |
+|:--|:--|
+| `start` | 시작점 `[x, y]` |
+| `end` | 끝점 `[x, y]` |
+| `ignore_objs` | 충돌 검사에서 제외할 오브젝트 목록 |
+| `debug_line` | 디버그용 선 표시 여부 (boolean) |
+
+**반환값:**
+```js
+{
+  hit: boolean,              // 충돌 여부
+  point_hit: [x, y],         // 충돌 지점 좌표
+  length_hit: Number,        // 충돌까지의 거리
+  normal_hit: [x, y]         // 충돌 표면의 법선 벡터
+}
+```
+
+---
+
+## 🎥 s_Camera  
+
+게임의 **메인 카메라를 제어**하는 클래스입니다.
+
+| 속성 / 메서드 | 설명 |
+|:--|:--|
+| `s_cam.target` | (`s_Object`) 존재 시 카메라가 해당 오브젝트 중심을 따라감 |
+| `s_cam.shake(time, power = [1, 1], range = [0.1, 0.1])` | 카메라에 진동(쉐이크) 효과를 부여합니다. (중첩 가능) |
+
+---
+
+## 🎮 s_Controller  
+
+사용자 **입력(Input)** 을 받아 처리하는 클래스입니다.  
+주로 `s_Pawn`과 연결되어 오브젝트를 조종하는 데 사용합니다.  
+`is_player`가 참(`true`)일 경우 키보드와 마우스 입력을 자동으로 수집합니다.
+
+### 🔹 생성자
+
+```js
+new s_Controller(is_player = false);
+```
+
+### 🔹 메서드
+
+| 메서드 | 설명 |
+|:--|:--|
+| `update_input(key, type)` | 새로운 입력 상태를 저장합니다. `key`는 문자열, `type`은 숫자입니다. |
+
+**입력 타입 코드 (키보드 기준):**
+
+| type 값 | 의미 |
+|:--|:--|
+| `0` | 입력 없음 |
+| `1` | 입력 중 |
+| `2` | 입력이 막 끝남 |
+| `3` | 입력이 막 시작됨 |
+
+---
+
+## 🧍 s_Pawn  
+
+`s_Controller`가 **빙의하거나 조종할 수 있는 `s_Object`** 입니다.
+
+| 속성 / 메서드 | 설명 |
+|:--|:--|
+| `Ievents` | 입력에 대응하는 이벤트 목록을 반환합니다. |
+| `add_Ievent(key, event)` | 사용자 정의 입력 이벤트(`event = function(type) {}`)를 추가합니다. 같은 키가 있을 경우 덮어씌워집니다. |
+| `delete_Ievent(key)` | 등록된 입력 이벤트를 삭제합니다. |
+
+---
+
+## 🧍‍♂️ s_Character  
+
+`s_Pawn`을 확장하여 **이동, 가속, 점프 등의 캐릭터 기능**을 제공합니다.
+
+| 속성 | 설명 |
+|:--|:--|
+| `accel` | 이동 중일 때의 가속 속도 |
+| `decel` | 정지 상태에서의 감속 속도 |
+| `max_speed` | 최대 이동 속도 |
+| `jump_speed` | 점프 시 속도 |
+| `max_jump_cnt` | 최대 점프 횟수 |
+
+| 메서드 | 설명 |
+|:--|:--|
+| `add_movement(dir, power = 1)` | 지정된 방향으로 캐릭터를 이동시킵니다. |
+| `jump(ignore_v = false)` | 캐릭터를 점프시킵니다. |
+
+---
+
+## 🎞️ s_AnimHelper  
+
+`s_Object`의 **애니메이션을 관리**하는 헬퍼 클래스입니다.
+
+### 🔹 생성자
+
+```js
+new s_AnimHelper(s_object, img_src, status);
+```
+
+| 속성 / 메서드 | 설명 |
+|:--|:--|
+| `img` | 사용할 캐릭터 스프라이트 이름 (`/characters` 폴더 내) |
+| `status` | 캐릭터 상태 인덱스 (보통 0 ~ 8) |
+| `update(status)` | 현재 상태값에 따라 캐릭터 이미지를 업데이트합니다. |
+
+---
+
 ## DEMO Project
 https://drive.google.com/file/d/1PNsSlV0MuREa6zoeZSWWS1Kx5RnAJVxD/view?usp=sharing                           
 현재 개발중
