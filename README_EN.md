@@ -179,17 +179,124 @@ new s_Joint(s_obj_a, s_obj_b, arm_length, nf, zetta, point_a = [0, 0], point_b =
 |:--|:--|
 | `destroy()` | Removes the joint |
 
+---## ⚔️ s_COLLIDER  
+
+A collection of functions related to **collision detection and calculations** between objects.
+
+### 🔹 Method
+
+```js
+s_COLLIDER.line_trace(start, end, ignore_objs, debug_line = false)
+```
+
+| Parameter | Description |
+|:--|:--|
+| `start` | Starting point `[x, y]` |
+| `end` | Ending point `[x, y]` |
+| `ignore_objs` | List of objects to ignore during collision check |
+| `debug_line` | Whether to draw the debug line (boolean) |
+
+**Return Value:**
+```js
+{
+  hit: boolean,              // Whether a collision occurred
+  point_hit: [x, y],         // Collision point coordinates
+  length_hit: Number,        // Distance to collision
+  normal_hit: [x, y]         // Normal vector of the collision surface
+}
+```
+
 ---
 
-## 🧭 Overall Class Structure
+## 🎥 s_Camera  
 
+Controls the **main game camera**.
+
+| Property / Method | Description |
+|:--|:--|
+| `s_cam.target` | (`s_Object`) If set, the camera follows the center of the target. |
+| `s_cam.shake(time, power = [1, 1], range = [0.1, 0.1])` | Adds a shake effect to the camera. (Can be stacked) |
+
+---
+
+## 🎮 s_Controller  
+
+Handles **user input**.  
+Primarily used with `s_Pawn` to control objects.  
+If `is_player` is `true`, keyboard and mouse input are automatically collected.
+
+### 🔹 Constructor
+
+```js
+new s_Controller(is_player = false);
 ```
-s_Object (base class)
- ├─ s_Physics (internal physics engine)
- ├─ s_Block (static collision object)
- ├─ s_TmpObject (temporary object)
- └─ s_Joint (connector component)
+
+### 🔹 Methods
+
+| Method | Description |
+|:--|:--|
+| `update_input(key, type)` | Saves a new input state. `key` is a string, and `type` is a number. |
+
+**Input Type Codes (Keyboard):**
+
+| Type | Meaning |
+|:--|:--|
+| `0` | No input |
+| `1` | Holding input |
+| `2` | Just released |
+| `3` | Just pressed |
+
+---
+
+## 🧍 s_Pawn  
+
+An `s_Object` that can be **possessed or controlled** by an `s_Controller`.
+
+| Property / Method | Description |
+|:--|:--|
+| `Ievents` | Returns the list of input event mappings. |
+| `add_Ievent(key, event)` | Adds a custom input event (`event = function(type) {}`); overwrites if key exists. |
+| `delete_Ievent(key)` | Deletes a registered input event. |
+
+---
+
+## 🧍‍♂️ s_Character  
+
+Extends `s_Pawn` to provide **character movement, acceleration, and jumping** features.
+
+| Property | Description |
+|:--|:--|
+| `accel` | Acceleration rate while moving |
+| `decel` | Deceleration rate while idle |
+| `max_speed` | Maximum movement speed |
+| `jump_speed` | Velocity applied on jump |
+| `max_jump_cnt` | Maximum number of jumps allowed |
+
+| Method | Description |
+|:--|:--|
+| `add_movement(dir, power = 1)` | Moves the character in the specified direction. |
+| `jump(ignore_v = false)` | Makes the character jump. |
+
+---
+
+## 🎞️ s_AnimHelper  
+
+A helper class for **managing the animation** of an `s_Object`.
+
+### 🔹 Constructor
+
+```js
+new s_AnimHelper(s_object, img_src, status);
 ```
+
+| Property / Method | Description |
+|:--|:--|
+| `img` | Character sprite name (inside `/characters` folder) |
+| `status` | Character sprite status index (usually 0 ~ 8) |
+| `update(status)` | Updates the character image according to the given status. |
+
+---
+
 ## DEMO Project
 https://drive.google.com/file/d/1PNsSlV0MuREa6zoeZSWWS1Kx5RnAJVxD/view?usp=sharing                        
 현재 개발중
