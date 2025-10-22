@@ -183,6 +183,7 @@ new s_Joint(s_obj_a, s_obj_b, arm_length, nf, zetta, point_a = [0, 0], point_b =
 ---
 
 ## DEMO Project
+https://drive.google.com/file/d/1PNsSlV0MuREa6zoeZSWWS1Kx5RnAJVxD/view?usp=sharing                           
 현재 개발중
 
 ## 관련 영상 및 링크
