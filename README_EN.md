@@ -1,5 +1,8 @@
+This document is translated by ChatGPT.                    
+If you find some error on document, tell me.
+
 # 🧩 stufi_Physics.js
-**Author:** TepTepHanSaida  
+**Author:** stuficida
 **Purpose:** An open-source project implementing physics in RPG Maker MZ.
 
 ---
